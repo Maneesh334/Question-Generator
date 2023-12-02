@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Generator</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            font-size: 36px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            width: 100%;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        select, input {
+            padding: 10px;
+            margin-bottom: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            color: #555;
+            width: calc(50% - 8px);
+        }
+
+        select:hover, input:hover {
+            background-color: #e0e0e0;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(81, 203, 238, 1);
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: calc(50% - 8px);
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .output-box {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            box-sizing: border-box;
+            width: 100%;
+            margin: 0 10px;
+        }
+
+        p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Question Generator</h1>
+    </header>
+
+    <form id="questionForm">
+
+        <label for="questionType">Question Type:</label>
+        <select id="questionType" name="questionType">
+            <option value="mcq">MCQ</option>
+            <option value="tf">True/False</option>
+            <option value="fitb">Fill in the Blanks</option>
+        </select>
+
+        <label for="subject">Subject:</label>
+        <select id="subject" name="subject">
+            <option value="physics">Physics</option>
+            <option value="math">Math</option>
+            <option value="chemistry">Chemistry</option>
+        </select>
+
+        <label for="easyQuestion">Easy Question:</label>
+        <input type="text" id="easyQuestion" name="easyQuestion" placeholder="Enter easy question">
+
+        <label for="difficultQuestion">Difficult Question:</label>
+        <input type="text" id="difficultQuestion" name="difficultQuestion" placeholder="Enter difficult question">
+
+        <button type="button" onclick="generateAndSendQuestions()">Generate</button>
+    </form>
+
+    <div class="output-box">
+        <h2>Generated Questions</h2>
+        <p id="responsz">Placeholder for generated questions</p>
+    </div>
+
+    <script>
+        async function generateAndSendQuestions() {
+            var easyQuestion = document.getElementById("easyQuestion").value;
+            var difficultQuestion = document.getElementById("difficultQuestion").value;
+            var questionType = document.getElementById("questionType").value;
+            var subject = document.getElementById("subject").value;
+    
+            var formData = {
+                easy_question: easyQuestion,
+                hard_question: difficultQuestion,
+                type: questionType,
+                subject: subject
+            };
+
+            const response = await fetch('http://127.0.0.1:5000/questions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                body: JSON.stringify(formData),
+            });
+            const result = await response.json();
+            document.getElementById("responsz").innerText = result.response;
+        }
+    </script>
+    
+
+</body>
+</html>
