@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,35 +28,79 @@
             width: 100%;
         }
 
+        /* New container style */
+        .form-container {
+            width: 100%;
+            max-width: 1000px;
+            box-sizing: border-box;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px; /* Rounded corners */
+            background-color: #fff;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+        }
+
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
-            max-width: 600px;
+            width: 80%;
+            margin: 0 auto; /* Center align the form */
         }
 
         label {
+            margin-top: 15px;
             margin-bottom: 8px;
             font-weight: bold;
             color: #555;
+            text-align: left;
+            width: 100%; 
         }
 
-        select, input {
+        .question {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            width: 100%;
+        }
+
+        .input-container1 {
+            width: 50%;
+            float: left;
+        }
+
+        .input-container2 {
+            width: 50%;
+            float: right;
+        }
+
+        select,
+        input {
             padding: 10px;
-            margin-bottom: 16px;
             border: none;
             border-radius: 5px;
             background-color: #f2f2f2;
             color: #555;
-            width: calc(50% - 8px);
+            width: 100%;
+        }
+        textarea {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            color: #555;
+            width: 90%;
+            height: 100px;
+            word-break: break-all;
         }
 
-        select:hover, input:hover {
+        select:hover,
+        input:hover {
             background-color: #e0e0e0;
         }
 
-        select:focus, input:focus {
+        select:focus,
+        input:focus {
             outline: none;
             box-shadow: 0 0 10px rgba(81, 203, 238, 1);
         }
@@ -69,27 +114,30 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s ease;
-            width: calc(50% - 8px);
+            width: 100%;
         }
 
         button:hover {
             background-color: #45a049;
         }
 
+
         h2 {
             color: #333;
             margin-top: 20px;
         }
 
+
         .output-box {
-            flex: 1;
+            width: 100%;
+            max-width: 1000px;
+            box-sizing: border-box;
             padding: 20px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 10px; /* Rounded corners */
             background-color: #fff;
-            box-sizing: border-box;
-            width: 100%;
-            margin: 0 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
         }
 
         p {
@@ -97,36 +145,47 @@
         }
     </style>
 </head>
+
 <body>
 
     <header>
         <h1>Question Generator</h1>
     </header>
 
-    <form id="questionForm">
+    <!-- New container div -->
+    <div class="form-container">
+        <form id="questionForm">
 
-        <label for="questionType">Question Type:</label>
-        <select id="questionType" name="questionType">
-            <option value="mcq">MCQ</option>
-            <option value="tf">True/False</option>
-            <option value="fitb">Fill in the Blanks</option>
-        </select>
+            <label for="questionType">Question Type:</label>
+            <select id="questionType" name="questionType">
+                <option value="mcq">MCQ</option>
+                <option value="tf">True/False</option>
+                <option value="fitb">Fill in the Blanks</option>
+            </select>
 
-        <label for="subject">Subject:</label>
-        <select id="subject" name="subject">
-            <option value="physics">Physics</option>
-            <option value="math">Math</option>
-            <option value="chemistry">Chemistry</option>
-        </select>
+            <label for="subject">Subject:</label>
+            <select id="subject" name="subject">
+                <option value="physics">Physics</option>
+                <option value="math">Math</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="computer science">Computer Science</option>
+            </select>
 
-        <label for="easyQuestion">Easy Question:</label>
-        <input type="text" id="easyQuestion" name="easyQuestion" placeholder="Enter easy question">
+            <div class="question">
+                <div class="input-container1">
+                    <label for="easyQuestion">Easy Question:</label>
+                    <textarea class="easyQuestion" type="text" id="easyQuestion" name="easyQuestion" placeholder="Enter Easy Question"></textarea>
+                </div>
 
-        <label for="difficultQuestion">Difficult Question:</label>
-        <input type="text" id="difficultQuestion" name="difficultQuestion" placeholder="Enter difficult question">
+                <div class="input-container2">
+                    <label for="difficultQuestion">Difficult Question:</label>
+                    <textarea class ="difficultQuestion" type="text" id="difficultQuestion" name="difficultQuestion" placeholder="Enter Difficult Question"></textarea>
+                </div>
+            </div>
 
-        <button type="button" onclick="generateAndSendQuestions()">Generate</button>
-    </form>
+            <button type="button" onclick="generateAndSendQuestions()">Generate</button>
+        </form>
+    </div>
 
     <div class="output-box">
         <h2>Generated Questions</h2>
@@ -139,7 +198,7 @@
             var difficultQuestion = document.getElementById("difficultQuestion").value;
             var questionType = document.getElementById("questionType").value;
             var subject = document.getElementById("subject").value;
-    
+
             var formData = {
                 easy_question: easyQuestion,
                 hard_question: difficultQuestion,
@@ -158,7 +217,8 @@
             document.getElementById("responsz").innerText = result.response;
         }
     </script>
-    
+
 
 </body>
+
 </html>
