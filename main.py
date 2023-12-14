@@ -43,7 +43,7 @@ def create_questions():
     else:
         format = "\n---\n Statement: generated statement. True/False? \n ----\n"
         temp = "Given an easy question and a hard question, generate a set of true/false '{subject}' statements whose difficulties are from easy to hard on the same topics. Return the statements in this format:'{format}'\nEasy question:'{easy_question}'\nHard question: '{hard_question}'"
-    llm = OpenAI(temperature=0.9, api_key = "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")
+    llm = OpenAI(temperature=0.9, api_key = "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")
     prompt = PromptTemplate(
         input_variables=["easy_question","hard_question", "format", "subject"],
         template="Given an easy question and a hard question, generate a set of '{subject}' questions whose difficulties are on the same scale. Return the questions in this format:'{format}'\nEasy question:'{easy_question}'\nHard question: '{hard_question}'",
